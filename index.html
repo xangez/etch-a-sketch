@@ -7,7 +7,10 @@
   </head>
   <body>
 
-    <button id="clearButton" onclick="clearBoard()">Clear</button>
+    <div id="menu">
+      <button id="clearButton" onclick="clearBoard()">Clear</button>
+    </div>
+
     <div id="container">
 
     </div>
@@ -16,24 +19,37 @@
     <script>
 
       let squares;
+      let resolution;
 
-      window.onload = function() {
+      function createBoard(resolution) {
         let div;
         let container = document.querySelector('#container');
         let fragment = document.createDocumentFragment();
 
-        for (let i=0; i<16; i++){
-          for (let j=0; j<16; j++) {
+        for (let i=0; i<resolution; i++){
+          for (let j=0; j<resolution; j++) {
             div = document.createElement('div');
             fragment.appendChild(div);
           }
         }
         container.appendChild(fragment);
 
+        let boardStyle = window.getComputedStyle(container);
+
+        let rowNum = parseInt(boardStyle.getPropertyValue("--rowNum"));
+        document.documentElement.style.setProperty("--rowNum", resolution);
+
+        let colNum = parseInt(boardStyle.getPropertyValue("--colNum"));
+        document.documentElement.style.setProperty("--colNum", resolution);
+        
+
         squares = container.querySelectorAll('div');
         squares.forEach(div => div.addEventListener('mouseover', changeColor));
+
+
       };
 
+      window.onload = createBoard(16);
 
       function changeColor(e) {
         e.target.style.backgroundColor = 'burlywood';
@@ -41,11 +57,19 @@
 
       function clearBoard() {
         squares.forEach(div => div.style.backgroundColor = "white");
-
+        resolution = prompt("Please enter grid resolution");
+        if (typeof(resolution) != "number" || resolution == null) {
+          return;
+        }
+        createBoard(resolution);
+        
       }
-
-   
-      //.setAttribute("class", "square")
+        
+        
+        //container.style.gridTemplateColumns = "repeat(resolution, 1fr)";
+        //container.style.gridTemplateRows = "repeat(resolution, 1fr)";
+        //.setAttribute("class", "square")
+       
 
     </script>
   </body>

@@ -1,3 +1,8 @@
+:root {
+  --rowNum: 16;
+  --colNum: 16;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -16,8 +21,20 @@ html, body {
   height: 600px;
   display: grid;
   grid-gap: 0;
-  margin: 80px auto;
-  grid-template-columns: repeat(16, 1fr);
-  grid-template-rows: repeat(16, 1fr);
+  margin: 0 auto 80px auto;
+  grid-template-rows: repeat(var(--rowNum), 1fr);
+  grid-template-columns: repeat(var(--colNum), 1fr);
   border: 1px solid burlywood;
+}
+
+#menu {
+  margin: 40px auto;
+  width: 600px;
+}
+
+#clearButton {
+  font-size: 17px;
+  background-color: burlywood;
+  width: 40px;
+  padding: 10px;
 }
