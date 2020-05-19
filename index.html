@@ -3,28 +3,56 @@
   <head>
     <meta charset="utf-8">
     <title>etch-a-sketch</title>
+    <style>
+
+      #container {
+        width: 600px;
+        height: 600px;
+        display: grid;
+        grid-gap: 0;
+        margin: 80px auto;
+        grid-template-columns: repeat(16, 1fr);
+        grid-template-rows: repeat(16, 1fr);
+        border: 1px solid burlywood;
+      }
+    </style>
   </head>
   <body>
 
-    <div id="container"></div>
+    <div id="container">
 
+    </div>
+
+    
     <script>
+
       let container = document.querySelector('#container');
-      let div;
 
-      for (let i=0; i<16; i++){
-        for (let j=0; j<16; i++) {
-         div = document.createElement('div');
-          container.appendChild('div');
+      window.onload = function() {
+        let div;
+        let fragment = document.createDocumentFragment();
 
+        for (let i=0; i<16; i++){
+
+          for (let j=0; j<16; j++) {
+            div = document.createElement('div');
+            container.appendChild(div);
+          }
         }
+        container.appendChild(fragment);
+        const squares = container.querySelectorAll('div');
+        squares.forEach(div => div.addEventListener('mouseenter', changeColor));
+      };
+
+      
+
+
+      function changeColor(e) {
+        e.target.style.backgroundColor = 'burlywood';
       }
-
-
-
-
-
-
+   
+      //.setAttribute("class", "square")
     </script>
   </body>
 </html>
+
