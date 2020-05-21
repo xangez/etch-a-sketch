@@ -1,0 +1,21 @@
+
+
+#colors
+https://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/
+https://stackoverflow.com/questions/1625681/dynamically-change-color-to-lighter-or-darker-by-percentage-css-javascript
+https://developer.mozilla.org/en-US/docs/Web/CSS/filter
+https://stackoverflow.com/questions/1484506/random-color-generator
+
+#manipulating css
+https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty
+https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute
+https://davidwalsh.name/event-delegate
+https://www.w3.org/TR/css-variables/
+https://stackoverflow.com/questions/14292997/changing-style-sheet-javascript
+
+https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information
+https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event
+https://stackoverflow.com/questions/5898656/check-if-an-element-contains-a-class-in-javascript
+https://stackoverflow.com/questions/1874560/how-to-use-javascript-to-change-div-backgroundcolor
