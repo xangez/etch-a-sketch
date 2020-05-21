@@ -9,6 +9,10 @@
 
     <div id="menu">
       <button id="clearButton" onclick="clearBoard()">Clear</button>
+      <button id="pen" onclick="toggleTool(pen)">Pen</button>
+      <button id="color" onclick="toggleTool(color)">Color</button>
+      <button id ="darken" onclick="toggleTool(darken)">Darken</button>
+      <button id="erase" onclick="toggleTool(erase)">Erase</button>
     </div>
 
     <div id="container">
@@ -20,10 +24,12 @@
 
       let squares;
       let resolution;
+      let container = document.querySelector('#container');
+      //let toolClass = "pen";
+      //let divColor;
 
       function createBoard(resolution) {
         let div;
-        let container = document.querySelector('#container');
         let fragment = document.createDocumentFragment();
 
         for (let i=0; i<resolution; i++){
@@ -42,33 +48,82 @@
         let colNum = parseInt(boardStyle.getPropertyValue("--colNum"));
         document.documentElement.style.setProperty("--colNum", resolution);
         
-
-        squares = container.querySelectorAll('div');
-        squares.forEach(div => div.addEventListener('mouseover', changeColor));
-
+        //squares = container.querySelectorAll('div');
+        //squares.forEach(div => div.addEventListener('mouseover', changeColor));
+        toggleTool(pen);
 
       };
 
       window.onload = createBoard(16);
 
-      function changeColor(e) {
-        e.target.style.backgroundColor = 'burlywood';
+      //function changeColor(e) {
+      //  e.target.setAttribute("class", "pen");
+      //}
+      
+      function toggleTool(tool) {
+        squares = container.querySelectorAll('div');
+        squareClass = squares.forEach(div => div.setAttribute("class", "squareColor"));
+        //targetColor = window.getComputedStyle('div').getPropertyValue("--color");
+
+
+        squares.forEach(div => div.removeEventListener('mouseover', pen));
+        squares.forEach(div => div.removeEventListener('mouseover', erase));
+        squares.forEach(div => div.removeEventListener('mouseover', color));
+        squares.forEach(div => div.removeEventListener('mouseover', darken));
+
+        
+        squares.forEach(div => div.addEventListener('mouseover', tool));
       }
 
+      
+      function pen(e) {
+        //e.style.setProperty("--color", "hsl(34, 57%, 70%)");
+        //e.target.setAttribute("class", "pen");
+
+        e.target.style.backgroundColor = "hsl(34, 57%, 70%)";
+      }
+
+      function erase(e) {
+        //e.target.setAttribute("class", "erase");
+        e.target.style.backgroundColor = "white";
+
+      }
+
+
+
+      function color(e) {
+        e.target.style.backgroundColor = randomColor();
+
+        function randomColor() {
+          return 'rgb(' + random(0,255) + ', ' + random(0,255) + ', ' + random(0,255) +  ')';
+          //return "hsl(random(0,255) + ', ' + random(10,30) + '%, ' + random(60,80) +  '%')";
+        }
+        function random(min,max) {
+          let num = Math.floor(Math.random()*(max-min)) + min;
+          return num;
+        }
+
+      }
+
+      function darken(e) {
+        e.target.style.backgroundColor = "yellow";
+
+      }
+      
+      
+
       function clearBoard() {
-        squares.forEach(div => div.style.backgroundColor = "white");
-        resolution = prompt("Please enter grid resolution");
-        if (typeof(resolution) != "number" || resolution == null) {
+        squares.forEach(div => div.setAttribute("class", "clear"));
+        resolution = prompt("Please enter grid resolution", "16");
+        if (isNaN(resolution) || resolution == null) {
           return;
         }
+        else if (resolution<1 || resolution>200){
+          resolution = prompt("Please enter grid resolution between 1 and 200", "50");
+        }
         createBoard(resolution);
-        
       }
-        
-        
-        //container.style.gridTemplateColumns = "repeat(resolution, 1fr)";
-        //container.style.gridTemplateRows = "repeat(resolution, 1fr)";
-        //.setAttribute("class", "square")
+
        
 
     </script>

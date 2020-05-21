@@ -1,6 +1,7 @@
 :root {
   --rowNum: 16;
   --colNum: 16;
+  --color: white;
 }
 
 * {
@@ -14,6 +15,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: hsl(35, 44%, 92%);
 }
 
 #container {
@@ -24,7 +26,7 @@ html, body {
   margin: 0 auto 80px auto;
   grid-template-rows: repeat(var(--rowNum), 1fr);
   grid-template-columns: repeat(var(--colNum), 1fr);
-  border: 1px solid burlywood;
+  background-color: white;
 }
 
 #menu {
@@ -32,9 +34,30 @@ html, body {
   width: 600px;
 }
 
-#clearButton {
+button {
   font-size: 17px;
-  background-color: burlywood;
-  width: 40px;
+  background-color: hsl(34, 57%, 70%);
+  width: auto;
   padding: 10px;
 }
+
+
+.squareColor {
+  background-color: white;
+}
+
+
+/*
+.pen {
+  background-color: burlywood;
+}
+
+.erase {
+  background-color: white;
+}
+
+.clear {
+  background-color: white;
+}
+
+*/
