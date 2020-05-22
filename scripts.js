@@ -89,6 +89,11 @@ function darken(e) {
 
 function clearBoard() {
   squares.forEach(div => div.style.backgroundColor = 'white');
+  squares.forEach(function(div)  {
+    getComputedStyle(div).getPropertyValue("brightness");
+    div.style.setProperty("--brightness", 1);
+  });
+
 }
 
 
