@@ -19,10 +19,10 @@ function createBoard(resolution) {
   let boardStyle = window.getComputedStyle(container);
 
   parseInt(boardStyle.getPropertyValue("--rowNum"));
-  document.documentElement.style.setProperty("--rowNum", resolution);
+  container.style.setProperty("--rowNum", resolution);
 
   parseInt(boardStyle.getPropertyValue("--colNum"));
-  document.documentElement.style.setProperty("--colNum", resolution);
+  container.style.setProperty("--colNum", resolution);
   
   toggleTool(pen);
 
@@ -44,15 +44,24 @@ function toggleTool(tool) {
 
 
 function pen(e) {
+  getComputedStyle(e.target).getPropertyValue("--brightness");
+  e.target.style.setProperty("--brightness", 1);
+  
   e.target.style.backgroundColor = "hsl(34, 57%, 70%)";
 }
 
 function erase(e) {
-  e.target.style.backgroundColor = '';
+  getComputedStyle(e.target).getPropertyValue("--brightness");
+  e.target.style.setProperty("--brightness", 1);
+  
+  e.target.style.backgroundColor = 'white';
 }
 
 
 function color(e) {
+  getComputedStyle(e.target).getPropertyValue("--brightness");
+  e.target.style.setProperty("--brightness", 1);
+
   e.target.style.backgroundColor = randomColor();
 
   function randomColor() {
@@ -69,28 +78,27 @@ function color(e) {
 
 
 function darken(e) {
-    let currentB = getComputedStyle(e.target).getPropertyValue("filter");
-
-    let bright = currentB[11];
-    let reduceB = "brightness(" + (bright - 0.1) + ')';
-    e.target.style.setProperty("filter", reduceB);
-
+    let currentB = getComputedStyle(e.target).getPropertyValue("--brightness");
+    if (currentB>0){
+      let bright = currentB - 0.1;
+      e.target.style.setProperty("--brightness", bright);
+    }
 }
 
 
 
 function clearBoard() {
-  squares.forEach(div => div.style.backgroundColor = '');
+  squares.forEach(div => div.style.backgroundColor = 'white');
 }
 
 
 function newGrid() {
-  resolution = prompt("Please enter grid resolution", "16");
+  resolution = prompt("Please enter grid resolution", "30");
     if (isNaN(resolution) || resolution == null) {
       return;
     }
-    else if (resolution<1 || resolution>80){
-      resolution = prompt("Please enter grid resolution between 1 and 80", "50");
+    else if (resolution<1 || resolution>60){
+      resolution = prompt("Please enter grid resolution between 1 and 60", "30");
     }
     clearBoard();
     createBoard(resolution);

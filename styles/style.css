@@ -2,6 +2,7 @@
   --rowNum: 16;
   --colNum: 16;
   --color: white;
+  --brightness: 1;
 }
 
 * {
@@ -37,11 +38,16 @@ html, body {
 button {
   font-size: 17px;
   background-color: hsl(34, 57%, 70%);
+  color: rgb(65, 57, 60);
   width: auto;
   padding: 10px;
 }
 
+button:hover {
+  background-color:#dbbaba;
+}
+
 .squareColor {
   background-color: white;
-  filter: brightness(1);
+  filter: brightness(var(--brightness));
 }
